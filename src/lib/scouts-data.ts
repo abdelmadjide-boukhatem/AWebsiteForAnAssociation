@@ -1,0 +1,231 @@
+import { Activity, Member, EducationalResource, UniversityInfo, ScoutValue } from '../types/scouts';
+
+export const scoutValues: ScoutValue[] = [
+  {
+    icon: 'Compass',
+    title: 'القيادة والمسؤولية',
+    description: 'نُنمّي روح القيادة والمسؤولية لدى الشباب من خلال الأنشطة الكشفية'
+  },
+  {
+    icon: 'Heart',
+    title: 'الأخوة والتضامن',
+    description: 'نعزز قيم الأخوة والتعاون بين أفراد الفوج والمجتمع'
+  },
+  {
+    icon: 'BookOpen',
+    title: 'التعلم المستمر',
+    description: 'نشجع على التعلم المستمر والتطوير الذاتي في جميع المجالات'
+  },
+  {
+    icon: 'TreePine',
+    title: 'حماية البيئة',
+    description: 'نعمل على نشر الوعي البيئي والحفاظ على الطبيعة'
+  },
+];
+
+export const activities: Activity[] = [
+  {
+    id: 'act-1',
+    title: 'المخيم الصيفي الوطني 2024',
+    description: 'مخيم وطني جامع يضم أكثر من 500 كشاف من مختلف الولايات، يتضمن أنشطة رياضية، ثقافية، وتكوينية.',
+    category: 'camping',
+    date: new Date('2024-07-15'),
+    location: 'الشلف',
+    imageUrl: 'https://images.unsplash.com/photo-1636247640621-c9850ad7e491?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY291dHMlMjBjYW1waW5nJTIwbmF0dXJlfGVufDF8fHx8MTc2Mjg5NzEzNXww&ixlib=rb-4.1.0&q=80&w=1080',
+    participants: 543,
+  },
+  {
+    id: 'act-2',
+    title: 'دورة تكوينية في الإسعافات الأولية',
+    description: 'تكوين شامل في الإسعافات الأولية والتعامل مع حالات الطوارئ بإشراف أطباء متخصصين.',
+    category: 'training',
+    date: new Date('2024-09-20'),
+    location: 'مديونة، الجزائر',
+    participants: 45,
+  },
+  {
+    id: 'act-3',
+    title: 'حملة تشجير وتنظيف الغابات',
+    description: 'مبادرة بيئية لزراعة 1000 شجرة وتنظيف المساحات الخضراء في محيط مديونة.',
+    category: 'environment',
+    date: new Date('2024-10-05'),
+    location: 'غابات مديونة',
+    imageUrl: 'https://images.unsplash.com/photo-1686644639739-9e22b9d49b1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXR1cmUlMjBtb3VudGFpbnMlMjBoaWtpbmd8ZW58MXx8fHwxNzYyODk3MTM2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    participants: 78,
+  },
+  {
+    id: 'act-4',
+    title: 'يوم تضامني مع الأيتام',
+    description: 'نشاط خيري وترفيهي مع أطفال دار الأيتام، يتضمن ألعاب، هدايا، وأنشطة تربوية.',
+    category: 'community',
+    date: new Date('2024-11-10'),
+    location: 'دار الأيتام، مديونة',
+    participants: 32,
+  },
+  {
+    id: 'act-5',
+    title: 'ورشة الاستعداد للبكالوريا',
+    description: 'ورشة مكثفة لمساعدة طلاب البكالوريا على التحضير الجيد للامتحانات النهائية.',
+    category: 'education',
+    date: new Date('2024-05-15'),
+    location: 'مقر الجمعية',
+    participants: 120,
+  },
+];
+
+export const members: Member[] = [
+  {
+    id: 'mem-1',
+    name: 'عبد الرحمن بوعلام',
+    role: 'قائد الفوج',
+    bio: 'قائد كشفي بخبرة 12 سنة، حاصل على شهادة القيادة الكشفية من المجلس الوطني',
+    joinDate: new Date('2012-03-01'),
+    skills: ['القيادة', 'التنظيم', 'التدريب', 'الإسعافات الأولية'],
+    contributions: ['تنظيم 15 مخيمًا وطنيًا', 'تدريب أكثر من 200 كشاف', 'إطلاق برنامج التوجيه الأكاديمي'],
+    email: 'abdurrahman@foujelfath.dz',
+    phone: '0550123456',
+  },
+  {
+    id: 'mem-2',
+    name: 'فاطمة الزهراء محمدي',
+    role: 'مسؤولة الفرع التربوي',
+    bio: 'أستاذة جامعية متخصصة في علوم التربية، تعمل على دعم الطلبة أكاديميًا',
+    joinDate: new Date('2015-09-01'),
+    skills: ['التوجيه الأكاديمي', 'التدريس', 'الإرشاد النفسي'],
+    contributions: ['إنشاء مكتبة تربوية رقمية', 'تقديم 50+ جلسة توجيه', 'إعداد دليل التخصصات الجامعية'],
+    email: 'fatima@foujelfath.dz',
+    phone: '0661234567',
+  },
+  {
+    id: 'mem-3',
+    name: 'كريم بن يوسف',
+    role: 'مسؤول الأنشطة البيئية',
+    bio: 'مهندس بيئة شغوف بحماية الطبيعة ونشر الوعي البيئي',
+    joinDate: new Date('2018-01-15'),
+    skills: ['البيئة والاستدامة', 'تنظيم الحملات', 'التوعية'],
+    contributions: ['قيادة 8 حملات تشجير', 'تنظيم ورش توعية بيئية', 'إنشاء مشتل الفوج'],
+  },
+  {
+    id: 'mem-4',
+    name: 'أمينة السعدي',
+    role: 'مسؤولة الإعلام والتواصل',
+    bio: 'طالبة إعلام آلي، تدير منصات التواصل الاجتماعي للفوج',
+    joinDate: new Date('2020-06-01'),
+    skills: ['إدارة وسائل التواصل', 'التصوير', 'التصميم الجرافيكي'],
+    contributions: ['إنشاء الموقع الرسمي', 'إدارة صفحات السوشيال ميديا', 'تصوير الأنشطة'],
+  },
+  {
+    id: 'mem-5',
+    name: 'يوسف العربي',
+    role: 'كشاف أول',
+    bio: 'طالب بكالوريا، عضو نشط في الفوج منذ 5 سنوات',
+    joinDate: new Date('2019-10-01'),
+    skills: ['المخيمات', 'الإسعافات الأولية', 'الرياضة'],
+    contributions: ['المشاركة في 12 مخيمًا', 'مساعدة الأشبال الجدد', 'تنظيم أنشطة رياضية'],
+  },
+];
+
+export const educationalResources: EducationalResource[] = [
+  {
+    id: 'edu-1',
+    title: 'ملخص شامل في الرياضيات - بكالوريا علوم تجريبية',
+    description: 'ملخص شامل لجميع دروس الرياضيات مع تمارين محلولة ونصائح للامتحان',
+    subject: 'الرياضيات',
+    level: 'bac',
+    fileType: 'pdf',
+    downloadCount: 523,
+  },
+  {
+    id: 'edu-2',
+    title: 'دروس مركزة في الفيزياء',
+    description: 'شرح مبسط لأهم دروس الفيزياء مع أمثلة وتطبيقات',
+    subject: 'الفيزياء',
+    level: 'bac',
+    fileType: 'pdf',
+    downloadCount: 412,
+  },
+  {
+    id: 'edu-3',
+    title: 'منهجية الإجابة في الفلسفة',
+    description: 'دليل كامل لكتابة مقالة فل��فية ناجحة مع نماذج',
+    subject: 'الفلسفة',
+    level: 'bac',
+    fileType: 'pdf',
+    downloadCount: 287,
+  },
+  {
+    id: 'edu-4',
+    title: 'دليل التخصصات الجامعية في الجزائر',
+    description: 'معلومات شاملة عن التخصصات، معدلات القبول، وآفاق العمل',
+    subject: 'التوجيه الجامعي',
+    level: 'university',
+    fileType: 'pdf',
+    downloadCount: 1024,
+  },
+  {
+    id: 'edu-5',
+    title: 'نصائح للنجاح في السنة الأولى جامعي',
+    description: 'دليل عملي للتكيف مع الحياة الجامعية وتحقيق التفوق',
+    subject: 'التوجيه الجامعي',
+    level: 'university',
+    fileType: 'article',
+    downloadCount: 356,
+  },
+];
+
+export const universityInfo: UniversityInfo[] = [
+  {
+    id: 'uni-1',
+    name: 'جامعة العلوم والتكنولوجيا هواري بومدين',
+    specialty: 'علوم الحاسوب',
+    requiredAverage: '14.5 - 16',
+    location: 'باب الزوار، الجزائر',
+    description: 'تخصص مرموق في البرمجة، الذكاء الاصطناعي، وأمن المعلومات',
+    type: 'engineering',
+  },
+  {
+    id: 'uni-2',
+    name: 'المدرسة الوطنية العليا للإعلام الآلي',
+    specialty: 'هندسة البرمجيات',
+    requiredAverage: '16 - 18',
+    location: 'وادي السمار، الجزائر',
+    description: 'مدرسة نخبوية في الإعلام الآلي وهندسة الأنظمة',
+    type: 'engineering',
+  },
+  {
+    id: 'uni-3',
+    name: 'كلية الطب',
+    specialty: 'الطب العام',
+    requiredAverage: '16 - 18',
+    location: 'مختلف الجامعات',
+    description: 'دراسة طبية شاملة مدتها 7 سنوات تؤهل لممارسة مهنة الطب',
+    type: 'medicine',
+  },
+  {
+    id: 'uni-4',
+    name: 'المدرسة الوطنية المتعددة التقنيات',
+    specialty: 'الهندسة المدنية',
+    requiredAverage: '15 - 17',
+    location: 'الحراش، الجزائر',
+    description: 'تكوين هندسي متميز في البناء والأشغال العمومية',
+    type: 'engineering',
+  },
+  {
+    id: 'uni-5',
+    name: 'جامعة الجزائر 2',
+    specialty: 'القانون',
+    requiredAverage: '13 - 14.5',
+    location: 'بوزريعة، الجزائر',
+    description: 'تخصص في القانون العام والخاص، القانون الدولي والأعمال',
+    type: 'letters',
+  },
+  {
+    id: 'uni-6',
+    name: 'كلية الاقتصاد والتجارة',
+    specialty: 'التسيير والتجارة',
+    requiredAverage: '12.5 - 14',
+    location: 'مختلف الجامعات',
+    description: 'تخصص في إدارة الأعمال، التسويق، والتجارة الدولية',
+    type: 'other',
+  },
+];
