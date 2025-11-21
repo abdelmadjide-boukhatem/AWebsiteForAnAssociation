@@ -1,146 +1,126 @@
-import { Link } from 'wouter';
-import { Building2, User, Briefcase, LogOut, Menu } from 'lucide-react';
-import { Button } from './ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X, BookOpen } from 'lucide-react';
 
-type HeaderProps = {
-  currentUser: any;
-  onLogout: () => void;
-};
+interface HeaderProps {
+  isScrolled: boolean;
+  currentPage: string;
+  onNavigate: (page: string) => void;
+}
 
-export function Header({ currentUser, onLogout }: HeaderProps) {
-  const NavLinks = () => (
-    <>
-      <Link href="/jobs">
-        <a className="hover:opacity-70 transition-opacity">Jobs</a>
-      </Link>
-      {currentUser?.type === 'candidate' && (
-        <Link href="/dashboard/candidate">
-          <a className="hover:opacity-70 transition-opacity">My Applications</a>
-        </Link>
-      )}
-      {currentUser?.type === 'company' && (
-        <Link href="/dashboard/company">
-          <a className="hover:opacity-70 transition-opacity">Dashboard</a>
-        </Link>
-      )}
-    </>
-  );
+export function Header({ isScrolled, currentPage, onNavigate }: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { name: 'الرئيسية', page: 'home' },
+    { name: 'الأقسام التعليمية', page: 'levels' },
+    { name: 'اللغات', page: 'languages' },
+    { name: 'الأساتذة', page: 'teachers' },
+    { name: 'الموارد', page: 'resources' },
+  ];
+
+  const handleNavigation = (page: string) => {
+    onNavigate(page);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
-    <header className="border-b bg-white sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/">
-          <a className="flex items-center gap-2 hover:opacity-70 transition-opacity">
-            <Briefcase className="w-6 h-6" />
-            <span>JobConnect</span>
-          </a>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          <NavLinks />
-        </nav>
-
-        <div className="flex items-center gap-3">
-          {currentUser ? (
-            <>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="hidden md:flex gap-2">
-                    {currentUser.type === 'company' ? (
-                      <Building2 className="w-4 h-4" />
-                    ) : (
-                      <User className="w-4 h-4" />
-                    )}
-                    {currentUser.name}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link href={`/dashboard/${currentUser.type}`}>
-                      <a className="flex items-center gap-2 w-full">Dashboard</a>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/profile">
-                      <a className="flex items-center gap-2 w-full">Profile</a>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={onLogout} className="text-red-600">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Mobile Menu */}
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="sm" className="md:hidden">
-                    <Menu className="w-5 h-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent>
-                  <div className="flex flex-col gap-4 mt-8">
-                    <div className="flex items-center gap-2 pb-4 border-b">
-                      {currentUser.type === 'company' ? (
-                        <Building2 className="w-5 h-5" />
-                      ) : (
-                        <User className="w-5 h-5" />
-                      )}
-                      <span>{currentUser.name}</span>
-                    </div>
-                    <Link href="/jobs">
-                      <a className="py-2">Jobs</a>
-                    </Link>
-                    {currentUser.type === 'candidate' && (
-                      <Link href="/dashboard/candidate">
-                        <a className="py-2">My Applications</a>
-                      </Link>
-                    )}
-                    {currentUser.type === 'company' && (
-                      <Link href="/dashboard/company">
-                        <a className="py-2">Dashboard</a>
-                      </Link>
-                    )}
-                    <Link href="/profile">
-                      <a className="py-2">Profile</a>
-                    </Link>
-                    <Button onClick={onLogout} variant="destructive" className="mt-4">
-                      <LogOut className="w-4 h-4 mr-2" />
-                      Logout
-                    </Button>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Link href="/login">
-                <a>
-                  <Button variant="ghost" size="sm">
-                    Sign In
-                  </Button>
-                </a>
-              </Link>
-              <Link href="/register">
-                <a>
-                  <Button size="sm">Get Started</Button>
-                </a>
-              </Link>
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-white/80 backdrop-blur-md shadow-md'
+      }`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-3 cursor-pointer"
+            onClick={() => handleNavigation('home')}
+          >
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+              <BookOpen className="w-7 h-7 text-white" />
             </div>
-          )}
+            <div>
+              <h1 className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Bilascent Academy
+              </h1>
+              <p className="text-xs text-gray-600">منصة التعلم المتكاملة</p>
+            </div>
+          </motion.div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item, index) => (
+              <motion.button
+                key={item.page}
+                onClick={() => handleNavigation(item.page)}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`text-gray-700 hover:text-blue-600 transition-colors relative group ${
+                  currentPage === item.page ? 'text-blue-600' : ''
+                }`}
+              >
+                {item.name}
+                <span
+                  className={`absolute bottom-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ${
+                    currentPage === item.page ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                ></span>
+              </motion.button>
+            ))}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all"
+            >
+              تسجيل الدخول
+            </motion.button>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
-    </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-t shadow-lg"
+          >
+            <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
+              {navItems.map((item) => (
+                <button
+                  key={item.page}
+                  onClick={() => handleNavigation(item.page)}
+                  className={`px-4 py-3 text-right rounded-lg transition-colors ${
+                    currentPage === item.page
+                      ? 'bg-blue-100 text-blue-600'
+                      : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+              <button className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg">
+                تسجيل الدخول
+              </button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
